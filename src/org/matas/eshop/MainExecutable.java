@@ -1,80 +1,69 @@
 package org.matas.eshop;
 
-// loop for password retry. (check)
-// cannot login? find out why (check)
-// refactor where possible
-//
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class PagrindinisFailas {
+
+    public static int selection = 0;
+    public static int emailValidation = 0;
+
     public static void main(String[] args) throws IOException {
         String filePath = "C:\\Users\\zewas\\IdeaProjects\\e-shop\\users.txt";
 
-        Scanner scan = new Scanner(System.in);
-
-        startUp();
-        int selection = 0;
+        final Scanner scan = new Scanner(System.in);
 
 
-        do {
+        LoginDetails input = new LoginDetails();
+
+        while (selection!= 3)
+        {
+            startUp();
             selection = scan.nextInt();
             if (selection == 1) {
-                System.out.println("Please enter a valid e-mail address to register: ");
-                LoginDetails input = new LoginDetails();
-                input.email = scan.next();
+
+                while (!input.email.equals("Invalid")){
+                    System.out.println("Please enter a valid e-mail address to register: ");
+                    input.email = scan.next();
+                    emailCheck(input);
+                }
+
                 //String str = input.email;
                 //char[] cArray = str.toCharArray();
 
-                emailCheck(input);
-
                 System.out.println("Create a new password (Must be at least 8 symbols): ");
                 input.password = scan.next();
-
                 passwordCheck(input);
-
                 writeToFile(filePath, input);
-
                 //input.ShowDetails();
+
                 if (input.email.equals("Invalid") || input.password.equals("Invalid")) {
                     System.out.println("Please create a new account.");
                     input.password = "";
                     input.email = "";
-                    startUp();
                 } else {
-                    System.out.println("Enter email to login");
-                    input.emailConnection = scan.next();
-                    System.out.println("Enter password to login");
-                    input.passwordConnection = scan.next();
-                    input.Connection();
-                    if (input.validationChecker == 1) {
-                        startUp();
-                    }
+                    System.out.println("Registration was succesful!");
                 }
-            }
-             /*
-             else if (selection == 2) {
+            } else if (selection == 2) {
                 System.out.println("Enter email to login");
                 input.emailConnection = scan.next();
                 System.out.println("Enter password to login");
                 input.passwordConnection = scan.next();
                 input.Connection();
-                if (input.validationChecker == 1){
-                    startUp();
+                if (input.validationChecker == 1) {
                 }
-            }
-              */
-            else if (selection == 3) {
+            } else if (selection == 3) {
                 System.out.println("Thank you for using my e-shop services! I wish you all the best.");
             } else {
-                System.out.println("Unfortunately I am not programmed to do this function, please select from the 3 available options:");
+                System.out.println("Unfortunately I am not programmed to do this function," +
+                        " please select from the 3 available options:");
                 System.out.println("1. Register to the e-shop system");
                 System.out.println("2. Login to your existing account");
                 System.out.println("3. Exit the application");
             }
-        } while (selection != 3);
+        }
     }
 
     private static void writeToFile(String filePath, LoginDetails input) throws IOException {
@@ -94,6 +83,7 @@ public class PagrindinisFailas {
     }
 
     private static void passwordCheck(LoginDetails input) {
+
         if (PasswordCheck.isValid(input.password)) {
             System.out.println("Password is valid!");
         } else {

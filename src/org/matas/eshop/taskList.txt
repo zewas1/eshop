@@ -1,0 +1,50 @@
+/*
+Assignments :
+
+refactor where possible (long term)
+use descriptive object and variable names
+
+Login system plan:
+
+loop for password retry. (check)
+login issues after registration (check)
+do not allow for password input, if email is using the wrong pattern
+allow multiple attempts for password input
+hash the passwords
+create multiple accounts and store them in a file
+login from file (not working)
+Loop to check through the registered users (multiple line scan)
+Additional registration fields: address (ZIP code mandatory, pattern for zipcode), phone number, superpowers
+
+E-shop plan:
+
+Create e-shop interface:
+a. Product
+b. Description
+c. Price
+d. Room for additional columns
+products uploaded from file
+file update after changes
+menu control with console commands
+functionality to add products into file with console commands and enough supwerpowers
+add products to cart
+Checkout system
+
+
+Optional:
+
+Date and time
+Colorful interface
+Top-up while logged in to make purchases
+Update profile information
+
+
+Testing plan:
+
+
+
+
+
+
+
+*/
