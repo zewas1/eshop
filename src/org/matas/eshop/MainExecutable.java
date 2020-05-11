@@ -10,7 +10,7 @@ public class MainExecutable {
     final static Scanner scan = new Scanner(System.in);
     final static File filePath = new File("users.txt");
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
 
         LoginDetails login = new LoginDetails(null,null);
@@ -32,13 +32,13 @@ public class MainExecutable {
                     writeToFile(login);
                     System.out.println("Registration was succesful!");
                 }
-            }/* else if (selection == 2) {
+            } else if (selection == 2) {
                 System.out.println("Enter email to login");
-                login.emailConnection = scan.next();
+                login.email = scan.next();
                 System.out.println("Enter password to login");
-                login.passwordConnection = scan.next();
+                login.password = scan.next();
                 login.Connection();
-            } */
+            }
              else if (selection == 3) {
                 System.out.println("Thank you for using my e-shop services! I wish you all the best.");
             } else {
