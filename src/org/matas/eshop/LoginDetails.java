@@ -1,25 +1,52 @@
 package org.matas.eshop;
 
-public class LoginDetails {
+import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-    String email;
-    String password;
-    String emailConnection;
-    String passwordConnection;
-    int validationChecker = 0;
+public class LoginDetails implements Serializable {
 
-    public void ShowDetails() {
-        System.out.println("Your email is: " + email);
-        System.out.println("Your password is: " + password);
+    public String email;
+    public String password;
+    //private String emailConnection;
+    //private String passwordConnection;
+    //int validationChecker = 0;
+
+    public LoginDetails(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+}
+
+
+
+/*
     public void Connection() {
         if (emailConnection.equalsIgnoreCase(email) && passwordConnection.equals(password)) {
             System.out.println("Login successfull");
-            validationChecker = 2;
+            validationChecker = 1;
         } else {
             System.out.println("Incorrect email or password.");
             validationChecker = 1;
         }
     }
 }
+
+ */

@@ -1,60 +1,45 @@
 package org.matas.eshop;
 
-
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
-public class PagrindinisFailas {
+public class MainExecutable {
 
     public static int selection = 0;
     public static int emailValidation = 0;
+    final static Scanner scan = new Scanner(System.in);
+    final static File filePath = new File("users.txt");
 
     public static void main(String[] args) throws IOException {
-        String filePath = "C:\\Users\\zewas\\IdeaProjects\\e-shop\\users.txt";
-
-        final Scanner scan = new Scanner(System.in);
 
 
-        LoginDetails input = new LoginDetails();
+        LoginDetails login = new LoginDetails(null,null);
 
-        while (selection!= 3)
-        {
+        while (selection != 3) {
             startUp();
             selection = scan.nextInt();
             if (selection == 1) {
-
-                while (!input.email.equals("Invalid")){
-                    System.out.println("Please enter a valid e-mail address to register: ");
-                    input.email = scan.next();
-                    emailCheck(input);
-                }
-
+                emailCheck(login);
                 //String str = input.email;
                 //char[] cArray = str.toCharArray();
-
-                System.out.println("Create a new password (Must be at least 8 symbols): ");
-                input.password = scan.next();
-                passwordCheck(input);
-                writeToFile(filePath, input);
+                passwordCheck(login);
                 //input.ShowDetails();
-
-                if (input.email.equals("Invalid") || input.password.equals("Invalid")) {
+                if (login.email.equals("Invalid") || login.password.equals("Invalid")) {
                     System.out.println("Please create a new account.");
-                    input.password = "";
-                    input.email = "";
+                    login.password = "";
+                    login.email = "";
                 } else {
+                    writeToFile(login);
                     System.out.println("Registration was succesful!");
                 }
-            } else if (selection == 2) {
+            }/* else if (selection == 2) {
                 System.out.println("Enter email to login");
-                input.emailConnection = scan.next();
+                login.emailConnection = scan.next();
                 System.out.println("Enter password to login");
-                input.passwordConnection = scan.next();
-                input.Connection();
-                if (input.validationChecker == 1) {
-                }
-            } else if (selection == 3) {
+                login.passwordConnection = scan.next();
+                login.Connection();
+            } */
+             else if (selection == 3) {
                 System.out.println("Thank you for using my e-shop services! I wish you all the best.");
             } else {
                 System.out.println("Unfortunately I am not programmed to do this function," +
@@ -66,35 +51,37 @@ public class PagrindinisFailas {
         }
     }
 
-    private static void writeToFile(String filePath, LoginDetails input) throws IOException {
-        FileWriter myWriter = new FileWriter(filePath);
-        myWriter.write(input.email + " ");
-        myWriter.write(input.password + " ");
-        myWriter.close();
+    private static void writeToFile(LoginDetails login) throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream(MainExecutable.filePath);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(login);
+        objectOutputStream.close();
     }
 
-    private static void emailCheck(LoginDetails input) {
-        if (EmailPatterCheck.isValid(input.email)) {
-            System.out.println("Email is valid!");
-        } else {
-            System.out.println("Email is invalid");
-            input.email = "Invalid";
-        }
+    private static void emailCheck(LoginDetails login) {
+        do {
+            System.out.println("Please enter a valid e-mail address to register: ");
+            login.email = scan.next();
+            if (EmailPatterCheck.isValid(login.email)) {
+                System.out.println("Email is valid!");
+            } else {
+                System.out.println("Email is invalid");
+                login.email = "Invalid";
+            }
+        } while (login.email.equals("Invalid"));
     }
 
-    private static void passwordCheck(LoginDetails input) {
-
-        if (PasswordCheck.isValid(input.password)) {
-            System.out.println("Password is valid!");
-        } else {
-            System.out.println("Password is invalid");
-            input.password = "Invalid";
-        }
-    }
-
-    private static void Login(Scanner scan) {
-        LoginDetails input = new LoginDetails();
-
+    private static void passwordCheck(LoginDetails login) {
+        do {
+            System.out.println("Please enter a valid password to register (Must be at least 8 symbol): ");
+            login.password = scan.next();
+            if (PasswordCheck.isValid(login.password)) {
+                System.out.println("Password is valid!");
+            } else {
+                System.out.println("Password is invalid");
+                login.password = "Invalid";
+            }
+        } while (login.password.equals("Invalid"));
     }
 
     private static void startUp() {

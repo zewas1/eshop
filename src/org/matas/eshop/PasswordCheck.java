@@ -1,5 +1,6 @@
 package org.matas.eshop;
 
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class PasswordCheck {
@@ -7,8 +8,10 @@ public class PasswordCheck {
         String passwordRegex = "((?=.*[a-zA-Z0-9_+&*-]).{8,40})";
 
         Pattern pat = Pattern.compile(passwordRegex);
-        if (password == null)
+        if (password == null){
             return false;
-        return pat.matcher(password).matches();
+        } else {
+            return pat.matcher(password).matches();
+        }
     }
 }

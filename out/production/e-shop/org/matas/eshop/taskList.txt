@@ -8,8 +8,8 @@ Login system plan:
 
 loop for password retry. (check)
 login issues after registration (check)
-do not allow for password input, if email is using the wrong pattern (check)
-allow multiple attempts for password input (check)
+do not allow for password input, if email is using the wrong pattern
+allow multiple attempts for password input
 hash the passwords
 create multiple accounts and store them in a file
 login from file (not working)
