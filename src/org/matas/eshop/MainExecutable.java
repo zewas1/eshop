@@ -1,6 +1,8 @@
 package org.matas.eshop;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MainExecutable {
@@ -9,16 +11,15 @@ public class MainExecutable {
     public static int emailValidation = 0;
     final static Scanner scan = new Scanner(System.in);
     final static File filePath = new File("users.txt");
+    public static List<Object> userNames = new ArrayList<Object>();
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-
-
-        LoginDetails login = new LoginDetails(null,null);
 
         while (selection != 3) {
             startUp();
             selection = scan.nextInt();
             if (selection == 1) {
+                LoginDetails login = new LoginDetails(null,null);
                 emailCheck(login);
                 //String str = input.email;
                 //char[] cArray = str.toCharArray();
@@ -33,11 +34,12 @@ public class MainExecutable {
                     System.out.println("Registration was succesful!");
                 }
             } else if (selection == 2) {
+                LoginDetails login = new LoginDetails(null,null);
                 System.out.println("Enter email to login");
                 login.email = scan.next();
                 System.out.println("Enter password to login");
                 login.password = scan.next();
-                login.Connection();
+                //login.Connection();
             }
              else if (selection == 3) {
                 System.out.println("Thank you for using my e-shop services! I wish you all the best.");
@@ -54,7 +56,8 @@ public class MainExecutable {
     private static void writeToFile(LoginDetails login) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(MainExecutable.filePath);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-        objectOutputStream.writeObject(login);
+        userNames.add(login);
+        objectOutputStream.writeObject(userNames);
         objectOutputStream.close();
     }
 

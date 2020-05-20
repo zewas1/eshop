@@ -7,6 +7,7 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class LoginDetails implements Serializable {
@@ -37,27 +38,28 @@ public class LoginDetails implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
+}
+/*
     public void Connection() throws IOException, ClassNotFoundException {
-        boolean objectChecker = true;
-        FileInputStream fis = new FileInputStream(MainExecutable.filePath);
 
-        while (objectChecker) {
-            try (ObjectInputStream objectInputStream = new ObjectInputStream(fis)) {
-                LoginDetails login = (LoginDetails) objectInputStream.readObject();
-                if (login != null) {
+
+            try {
+                FileInputStream fis = new FileInputStream(MainExecutable.filePath);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                MainExecutable.userNames=(List<Object>)ois.readObject();
+
+                for (int i = 0; i<MainExecutable.userNames.size(); i++) {
+                    MainExecutable.userNames.get(i).
+
+                }
                     if (this.email.equalsIgnoreCase(login.getEmail()) && this.password.equals(login.getPassword())) {
                         System.out.println("Login successfull");
                     } else {
                         System.out.println("Incorrect email or password.");
                     }
-                } else {
-                    objectChecker = false;
-                }
-            } catch (Exception ignored) {
 
             }
         }
     }
 }
-
+*/
