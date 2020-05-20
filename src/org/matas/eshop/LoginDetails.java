@@ -38,28 +38,19 @@ public class LoginDetails implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-}
+
 /*
-    public void Connection() throws IOException, ClassNotFoundException {
+    public void Connection() throws IOException {
+        FileReader fileReader = new FileReader(MainExecutable.filePath);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
 
+        boolean currentLine;
 
-            try {
-                FileInputStream fis = new FileInputStream(MainExecutable.filePath);
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                MainExecutable.userNames=(List<Object>)ois.readObject();
-
-                for (int i = 0; i<MainExecutable.userNames.size(); i++) {
-                    MainExecutable.userNames.get(i).
-
-                }
-                    if (this.email.equalsIgnoreCase(login.getEmail()) && this.password.equals(login.getPassword())) {
-                        System.out.println("Login successfull");
-                    } else {
-                        System.out.println("Incorrect email or password.");
-                    }
-
-            }
+        while (currentLine = bufferedReader.readLine() != null){
+            for (int i = 0, i < MainExecutable.logData.)
         }
     }
+
+ */
 }
-*/
+

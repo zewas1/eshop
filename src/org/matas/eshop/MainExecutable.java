@@ -1,9 +1,11 @@
 package org.matas.eshop;
 
+import javafx.scene.chart.ScatterChart;
+import sun.applet.Main;
+
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class MainExecutable {
 
@@ -11,15 +13,20 @@ public class MainExecutable {
     public static int emailValidation = 0;
     final static Scanner scan = new Scanner(System.in);
     final static File filePath = new File("users.txt");
-    public static List<Object> userNames = new ArrayList<Object>();
+    public static HashMap<String, String> logData = new HashMap<String, String>();
+
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
+
+
+        LoginDetails login = new LoginDetails(null,null);
+
 
         while (selection != 3) {
             startUp();
             selection = scan.nextInt();
             if (selection == 1) {
-                LoginDetails login = new LoginDetails(null,null);
+
                 emailCheck(login);
                 //String str = input.email;
                 //char[] cArray = str.toCharArray();
@@ -34,7 +41,6 @@ public class MainExecutable {
                     System.out.println("Registration was succesful!");
                 }
             } else if (selection == 2) {
-                LoginDetails login = new LoginDetails(null,null);
                 System.out.println("Enter email to login");
                 login.email = scan.next();
                 System.out.println("Enter password to login");
@@ -54,11 +60,12 @@ public class MainExecutable {
     }
 
     private static void writeToFile(LoginDetails login) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream(MainExecutable.filePath);
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-        userNames.add(login);
-        objectOutputStream.writeObject(userNames);
-        objectOutputStream.close();
+        logData.put(login.getEmail(), login.getPassword());
+        FileWriter fileWriter = new FileWriter(MainExecutable.filePath);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(String.valueOf(logData));
+        bufferedWriter.newLine();
+        bufferedWriter.close();
     }
 
     private static void emailCheck(LoginDetails login) {

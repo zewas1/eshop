@@ -11,8 +11,8 @@ login issues after registration (check)
 do not allow for password input, if email is using the wrong pattern (check)
 allow multiple attempts for password input (check)
 hash the passwords
-create multiple accounts and store them in a file
-login from file (check)
+create multiple accounts and store them in a file (check)
+login from file // UNRESOLVED!
 Loop to check through the registered users (multiple line scan)
 Additional registration fields: address (ZIP code mandatory, pattern for zipcode), phone number, superpowers
 
